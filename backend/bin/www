@@ -8,11 +8,23 @@ var app = require('../app');
 var debug = require('debug')('backend:server');
 var http = require('http');
 
-/**
- * Get port from environment and store in Express.
- */
+const mongoose = require("mongoose")
+const dbInfo = require('../config/dbConfig.json')
 
-var port = normalizePort(process.env.PORT || '3000');
+const db= mongoose.connection;
+db.on('error', console.error)
+db.once('open',()=>{
+  console.log("몽고DB 연결중")
+})
+
+mongoose.connect(
+  `mongodb+srv://${dbInfo.username}:${dbInfo.password}@firstproject.sm7vs.mongodb.net/kingsraid?retryWrites=true&w=majority
+
+  `,
+  { useUnifiedTopology: true, useNewUrlParser: true }
+);
+
+var port = normalizePort(process.env.PORT || '3030');
 app.set('port', port);
 
 /**
