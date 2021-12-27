@@ -1,16 +1,17 @@
-const express = require("express");const router = express.Router();
+const express = require("express");const { createMainPost, readMainPost, deleteMainPost } = require("../../controller/board/mainController");
+const router = express.Router();
 
 // 이미지 업로드 경로
 // const upload = require("../../modules/awsUpload");
 
 // 생성
-router.post("/");
+router.post("/", createMainPost);
 
 // 읽기
-router.get("/");
+router.get("/",readMainPost);
 
 // 삭제
-router.delete("/:id");
+router.delete("/:id", deleteMainPost);
 
 // 수정
 router.put("/:id");
@@ -19,6 +20,6 @@ router.put("/:id");
 router.get("/:id");
 
 //이미지 업로드
-router.post("/images", upload.single("img"));
+// router.post("/images", upload.single("img"));
 
 module.exports = router;
