@@ -1,4 +1,4 @@
-const express = require("express");const { createMainPost, readMainPost, deleteMainPost } = require("../../controller/board/mainController");
+const express = require("express");const { createMainPost, readMainPost, deleteMainPost, updateMainPost, searchMainPost } = require("../../controller/board/mainController");
 const router = express.Router();
 
 // 이미지 업로드 경로
@@ -14,10 +14,10 @@ router.get("/",readMainPost);
 router.delete("/:id", deleteMainPost);
 
 // 수정
-router.put("/:id");
+router.put("/:id", updateMainPost);
 
 // 검색
-router.get("/:id");
+router.get("/:id", searchMainPost);
 
 //이미지 업로드
 // router.post("/images", upload.single("img"));
