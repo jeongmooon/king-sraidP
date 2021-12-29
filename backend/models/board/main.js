@@ -6,6 +6,10 @@ const mainModels = new Schema({
         type: String,
         required:true,
     },
+    category:{
+        type:String,
+        required:true
+    },
     contents:{
         type:String,
         required:true,

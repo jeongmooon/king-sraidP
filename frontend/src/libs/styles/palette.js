@@ -1,7 +1,7 @@
 // source: https://yeun.github.io/open-color/
 
 const palette = {
-    main: ["#ed6653"],
+    main: ["#464964"],
     gray: [
       "#f8f9fa",
       "#f1f3f5",

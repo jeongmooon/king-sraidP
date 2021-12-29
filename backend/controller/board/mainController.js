@@ -5,7 +5,7 @@ const { OK, DB_ERROR, NO_DATA, NO_ACCOUNT } = require('../../modules/stautsModul
 const mainController ={
     // 글쓰기
     createMainPost : async (req,res)=>{
-        const { title, _id, contents, imgURL}= req.body
+        const { title, _id, contents, category, imgURL}= req.body
 
         // 유저 정보 찾기
         try {
@@ -20,9 +20,10 @@ const mainController ={
                     contents,
                     userId,
                     imgURL,
+                    category,
                     createDate : new Date()
                 })
-        
+
                 try {
                     await post.save()
                     res.status(OK).json({

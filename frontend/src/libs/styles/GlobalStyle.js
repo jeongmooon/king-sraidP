@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components"
 import reset from 'styled-reset'
 
-const GlobalStlye = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
     ${reset}
 
     html {
@@ -9,7 +9,7 @@ const GlobalStlye = createGlobalStyle`
     }
 
     body{
-        padding-left: 6rem;
+        padding-top: 6rem;
     }
 
     strong{
@@ -19,5 +19,7 @@ const GlobalStlye = createGlobalStyle`
     em{
         font-style: italic;
     }
-
 `
+
+
+export default GlobalStyle;

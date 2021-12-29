@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import client from './libs/api/client';
+import GlobalStyle from './libs/styles/GlobalStyle';
+import MainPage from './pages/MainPage';
+import NaviPage from './pages/NaviPage';
 
 function App() {
+  const [mainData, setMainData] = useState([]);
+
+  useEffect(() => {
+      getMainData();
+  }, [])
+
+  const getMainData = async()=>{
+      const response = await client.get("/main");
+      setMainData(response.data.dataList)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NaviPage />
+      <GlobalStyle />
+        <Routes>
+          <Route path="/" element={<MainPage mainData={mainData} />} />
+        </Routes>
+    </>
   );
 }
 
