@@ -5,24 +5,26 @@ import palette from '../../libs/styles/palette'
 const BoardItem = styled.div`
     position: relative;
     width: 175px;
-    height: 175px;
 `
 
 const BoardTitle = styled.p`
     color : ${palette.main};
     font-size: 14px;
     font-weight: bold;
+    text-align: center;
     position: relative;
+    white-space: pre-wrap;
 `
 
 
 function ItemComponent({board}) {
-    console.log(board)
     const {title, _id} = board;
     return (
-        <BoardItem>
-            <BoardTitle>{title}</BoardTitle>
-        </BoardItem>
+        <>
+            <BoardItem>
+                <BoardTitle>{title}</BoardTitle><hr />
+            </BoardItem><br />
+        </>
     )
 }
 

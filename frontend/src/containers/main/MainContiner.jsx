@@ -6,14 +6,18 @@ import ItemComponent from '../../components/main/ItemComponent'
 import client from '../../libs/api/client'
 
 function MainContiner({mainData}) {
+    const id =mainData._id;
+    console.log(mainData._id)
+    // const onClickItem =()={
+
+    // }
     return (
         <>
             <BannerComponent />
             <CategoryComponent>이벤트</CategoryComponent>
             <ItemWrapComponent>
                 {mainData.map((board) => {
-                    console.log(board.category)
-                    if (board.category === 1) {
+                    if (board.category === '1') {
                         return(
                             <ItemComponent
                             key={board["_id"]}
@@ -25,7 +29,7 @@ function MainContiner({mainData}) {
             <CategoryComponent>결투장 정보</CategoryComponent>
             <ItemWrapComponent>
                 {mainData.map((board)=>{
-                    if (board.category === 2) {
+                    if (board.category === '2') {
                         return(
                             <ItemComponent
                             key={board["_id"]}

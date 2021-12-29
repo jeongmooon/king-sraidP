@@ -6,7 +6,6 @@ const ItemWrap = styled.div`
   flex-flow: row wrap;
   justify-content: center;
   margin-top: 10px;
-  margin-bottom: 50px;
 
   @media only screen and (min-width: 768px) {
     margin: 0 auto;
