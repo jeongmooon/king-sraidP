@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import SigInContainer from './containers/auth/user/SigInContainer';
+import SignUpContainer from './containers/auth/user/SignUpContainer';
 import client from './libs/api/client';
 import GlobalStyle from './libs/styles/GlobalStyle';
 import DetailPage from './pages/DetailPage';
@@ -25,6 +27,8 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage mainData={mainData} />} />
           <Route path="/detail/:id" element={<DetailPage />} />
+          <Route path="/signin" element={<SigInContainer />} />
+          <Route path="/signup" element={<SignUpContainer />} />
         </Routes>
     </>
   );

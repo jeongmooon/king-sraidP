@@ -54,15 +54,15 @@ const StyledButton = styled.div`
   }
 `;
 
-function NavbarComponent() {
+function NavbarComponent({ onClickSignUp, onClickSignIn, logoClick }) {
     return (
         <NavbarBlock>
             <NavbarWrapper>
                 <div className='left'>왼쪽</div>
-                <LogImage src="https://firebasestorage.googleapis.com/v0/b/jeongmoon-79aec.appspot.com/o/kingsraidlogo.png?alt=media&token=0f08d7bc-7c1e-4c18-8c19-264787417932" alt="" />
+                <LogImage onClick={logoClick} src="https://firebasestorage.googleapis.com/v0/b/jeongmoon-79aec.appspot.com/o/kingsraidlogo.png?alt=media&token=0f08d7bc-7c1e-4c18-8c19-264787417932" alt="" />
                 <div className='right'>
-                    <StyledButton>회원가입</StyledButton>
-                    <StyledButton>로그인</StyledButton>
+                    <StyledButton onClick={onClickSignUp}>회원가입</StyledButton>
+                    <StyledButton onClick={onClickSignIn}>로그인</StyledButton>
                 </div>
             </NavbarWrapper>
         </NavbarBlock>
