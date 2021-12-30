@@ -5,6 +5,7 @@ import palette from '../../libs/styles/palette'
 const BoardItem = styled.div`
     position: relative;
     width: 175px;
+    cursor: pointer;
 `
 
 const BoardTitle = styled.p`
@@ -17,11 +18,11 @@ const BoardTitle = styled.p`
 `
 
 
-function ItemComponent({board}) {
+function ItemComponent({board, onClickItem}) {
     const {title, _id} = board;
     return (
         <>
-            <BoardItem>
+            <BoardItem onClick={()=>onClickItem(_id)} >
                 <BoardTitle>{title}</BoardTitle><hr />
             </BoardItem><br />
         </>

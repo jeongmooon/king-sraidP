@@ -1,45 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import ItemWrapComponent from '../../components/common/ItemWrapComponent'
+import { useNavigate } from 'react-router-dom'
 import BannerComponent from '../../components/main/BannerComponent'
-import CategoryComponent from '../../components/main/CategoryComponent'
-import ItemComponent from '../../components/main/ItemComponent'
-import client from '../../libs/api/client'
+import MainComponet from '../../components/main/MainComponet';
+import ChatContainer from './chat/ChatContainer';
 
 function MainContiner({mainData}) {
-    const id =mainData._id;
-    console.log(mainData._id)
-    // const onClickItem =()={
-
-    // }
+    const navigate = useNavigate();
+    
+    const onClickItem = (id) => {
+        console.log(id)
+        navigate(`/detail/${id}`);
+    };
+    
     return (
         <>
             <BannerComponent />
-            <CategoryComponent>이벤트</CategoryComponent>
-            <ItemWrapComponent>
-                {mainData.map((board) => {
-                    if (board.category === '1') {
-                        return(
-                            <ItemComponent
-                            key={board["_id"]}
-                            board ={board} />
-                        );
-                    }
-                })}
-            </ItemWrapComponent>
-            <CategoryComponent>결투장 정보</CategoryComponent>
-            <ItemWrapComponent>
-                {mainData.map((board)=>{
-                    if (board.category === '2') {
-                        return(
-                            <ItemComponent
-                            key={board["_id"]}
-                            board ={board} />
-                        );
-                    }
-                })}
-            </ItemWrapComponent>
-            <CategoryComponent>자유 게시판</CategoryComponent>
-            <ItemWrapComponent>123</ItemWrapComponent>
+            <ChatContainer />
+            <MainComponet mainData={mainData} onClickItem={onClickItem} />
+            
         </>
     )
 }
