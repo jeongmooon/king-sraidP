@@ -59,7 +59,7 @@ function NavbarComponent({ onClickSignUp, onClickSignIn, logoClick }) {
         <NavbarBlock>
             <NavbarWrapper>
                 <div className='left'>왼쪽</div>
-                <LogImage onClick={logoClick} src="https://firebasestorage.googleapis.com/v0/b/jeongmoon-79aec.appspot.com/o/kingsraidlogo.png?alt=media&token=0f08d7bc-7c1e-4c18-8c19-264787417932" alt="" />
+                <LogImage onClick={logoClick} src="blob:http://localhost:3000/59e9648d-499a-4ad4-8aa3-d7ff7159e985" alt="" />
                 <div className='right'>
                     <StyledButton onClick={onClickSignUp}>회원가입</StyledButton>
                     <StyledButton onClick={onClickSignIn}>로그인</StyledButton>

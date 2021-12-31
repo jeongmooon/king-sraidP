@@ -19,7 +19,7 @@ const BannerImg = styled.img`
 function BannerComponent() {
     return (
         <BannerBlock>
-            <BannerImg src="https://firebasestorage.googleapis.com/v0/b/jeongmoon-79aec.appspot.com/o/banner.gif?alt=media&token=5e36e08a-6d9d-4278-b815-2770db0da93c" alt='' />
+            <BannerImg src="blob:http://localhost:3000/545a7554-331f-48fc-a5f5-502a2dfa4e85" alt='' />
         </BannerBlock>
     )
 }

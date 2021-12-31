@@ -8,6 +8,7 @@ import GlobalStyle from './libs/styles/GlobalStyle';
 import DetailPage from './pages/DetailPage';
 import MainPage from './pages/MainPage';
 import NaviPage from './pages/NaviPage';
+import WritePage from './pages/WritePage';
 
 function App() {
   const [mainData, setMainData] = useState([]);
@@ -29,6 +30,7 @@ function App() {
           <Route path="/detail/:id" element={<DetailPage />} />
           <Route path="/signin" element={<SigInContainer />} />
           <Route path="/signup" element={<SignUpContainer />} />
+          <Route path="/write" element={<WritePage />} />
         </Routes>
     </>
   );
