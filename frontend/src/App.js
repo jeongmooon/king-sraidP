@@ -12,7 +12,16 @@ import WritePage from './pages/WritePage';
 
 function App() {
   const [mainData, setMainData] = useState([]);
+  const [isLogined, setIsLogined] = useState();
 
+  // 자동로그인
+  useEffect(()=>{
+    
+  })
+
+  
+
+  // 메인 데이터 불러오기
   useEffect(() => {
       getMainData();
   }, [])
