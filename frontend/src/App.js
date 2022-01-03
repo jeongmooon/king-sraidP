@@ -12,12 +12,36 @@ import WritePage from './pages/WritePage';
 
 function App() {
   const [mainData, setMainData] = useState([]);
-  const [isLogined, setIsLogined] = useState();
+
+  // 자동로그인
+  const [isLogined, setIsLogined] = useState(false);
+  const [user, setUser] = useState(null);
 
   // 자동로그인
   useEffect(()=>{
-    
-  })
+    const token = localStorage.getItem('accessToken')
+    ? localStorage.getItem('accessToken') : null;
+
+    const test = async () =>{
+      client.defaults.headers['authorization'] = token;
+      let result;
+
+      try {
+        result = await client.get('/user')
+      } catch (error) {
+        console.log('토큰에러>>>>', error)
+      }
+
+      const targetUser = result.data.data;
+      setIsLogined(true);
+      setUser(targetUser)
+    }
+
+    if(token){
+      test();
+      console.log("자동로그인중")
+    }
+  },[]);
 
   
 

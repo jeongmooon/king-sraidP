@@ -1,5 +1,5 @@
 const jwtModule = require("./jwtModule");
-const adminModel = require("../models/auth/admin");
+const userModel = require("../models/auth/user");
 
 const authModule = {
   loggedIn: async (req, res, next) => {
@@ -26,11 +26,11 @@ const authModule = {
         message: "에러 토큰",
       });
     }
-    let adminInfo;
+    let userInfo;
 
     try {
-      adminInfo = await adminModel.findOne({ _id: decoded.objId });
-      if (!adminInfo) {
+      userInfo = await userModel.findOne({ _id: decoded.objId });
+      if (!userInfo) {
         return res.status(401).json({
           message: "일치하지 않는 유저임니다",
         });
@@ -41,7 +41,7 @@ const authModule = {
       });
     }
 
-    req.adminInfo = adminInfo;
+    req.userInfo = userInfo;
     next();
   },
 };
