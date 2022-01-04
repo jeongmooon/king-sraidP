@@ -1,5 +1,5 @@
-const jwt = require("jsonwebtoken");
 const jwtSecret = require("../config/jwtConfig.json");
+const jwt = require("jsonwebtoken")
 
 const jwtModule = {
   create: (payload) => {

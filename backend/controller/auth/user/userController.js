@@ -1,4 +1,5 @@
-const userModels = require('../../../models/auth/user')
+const userModels = require('../../../models/auth/user');
+const jwtModule = require('../../../modules/jwtMoudule');
 const passwordModule = require('../../../modules/passwrodModule');
 const {OK, DB_ERROR,OVER_ACCOUNT,NO_ACCOUNT, LOCK_ACCOUNT, OVER_PASSWORD} = require('../../../modules/stautsModule')
 
@@ -7,7 +8,7 @@ const userController ={
     // 회원가입
     createUser : async(req, res)=>{
         const {userId, email, password} = req.body;
-
+        
         // 아이디 찾기
         let searchId;
         try {
@@ -76,8 +77,12 @@ const userController ={
                 // 비밀번호 비교
                 if(loginPassword === passwordP){
                     // 비밀번호가 같다면 토큰생성
+                    const accessToken = jwtModule.create({
+                        objId
+                    })
                     res.status(OK).json({
-                        message:"로그인 성공"
+                        message:"로그인 성공",
+                        accessToken : accessToken,
                     })
                 }else{
                     // 비밀번호가 틀리다면

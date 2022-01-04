@@ -1,9 +1,10 @@
-const jwtModule = require("./jwtModule");
 const userModel = require("../models/auth/user");
+const jwtModule = require('./jwtMoudule')
 
 const authModule = {
   loggedIn: async (req, res, next) => {
     const accessToken = req.headers.authorization;
+    console.log(accessToken);
 
     if (!accessToken) {
       res.status(409).json({
@@ -40,6 +41,7 @@ const authModule = {
         message: "유효하지 않는 유저 입니다",
       });
     }
+    console.log(userInfo)
 
     req.userInfo = userInfo;
     next();

@@ -1,21 +1,21 @@
-import { OK, OVER_ACCOUNT } from "../../modules/stautsModule";
+const { OK, NO_ACCOUNT } = require("../../modules/stautsModule");
 
-const userLoginController = {
-    getLoginInfo : (req, res)=>{
-        const loginInfo = req.userInfo;
-
-        if(!loginInfo) {
-            res.status(OVER_ACCOUNT).json({
-                message : "유저정보 없음"
-            })
-            return
-        }
-
-        res.status(OK).json({
-            message:"유저정보 조회 성공",
-            data : loginInfo
-        })
+const loginCheckController = {
+    getLoginInfo: (req, res) => {
+      const loginInfo = req.userInfo;
+  
+      if (!loginInfo) {
+        res.status(NO_ACCOUNT).json({
+          message: "유저정보가 없음",
+        });
+        return;
+      }
+  
+      res.status(OK).json({
+        message: "유저 조회 성공",
+        data: loginInfo,
+      });
     },
-};
-
-module.exports = userLoginController;
+  };
+  
+  module.exports = loginCheckController;

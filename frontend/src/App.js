@@ -24,6 +24,7 @@ function App() {
 
     const test = async () =>{
       client.defaults.headers['authorization'] = token;
+      console.log(token);
       let result;
 
       try {
