@@ -54,16 +54,23 @@ const StyledButton = styled.div`
   }
 `;
 
-function NavbarComponent({ onClickSignUp, onClickSignIn, logoClick }) {
+function NavbarComponent({ onClickSignUp, onClickSignIn, logoClick, isLogined, onClickWrite }) {
     return (
         <NavbarBlock>
             <NavbarWrapper>
                 <div className='left'>왼쪽</div>
                 <LogImage onClick={logoClick} src="blob:http://localhost:3000/59e9648d-499a-4ad4-8aa3-d7ff7159e985" alt="" />
-                <div className='right'>
-                    <StyledButton onClick={onClickSignUp}>회원가입</StyledButton>
-                    <StyledButton onClick={onClickSignIn}>로그인</StyledButton>
-                </div>
+                {isLogined ? (
+                    <div className='right'>
+                        <StyledButton onClick={onClickWrite}>글쓰기</StyledButton>
+                        <StyledButton>마이페이지</StyledButton>
+                    </div>
+                ) :(
+                    <div className='right'>
+                        <StyledButton onClick={onClickSignUp}>회원가입</StyledButton>
+                        <StyledButton onClick={onClickSignIn}>로그인</StyledButton>
+                    </div>
+                )}                
             </NavbarWrapper>
         </NavbarBlock>
     )

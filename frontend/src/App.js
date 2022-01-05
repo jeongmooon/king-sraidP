@@ -57,7 +57,7 @@ function App() {
   }
   return (
     <>
-      <NaviPage />
+      <NaviPage isLogined={isLogined} />
       <GlobalStyle />
         <Routes>
           <Route path="/" element={<MainPage mainData={mainData} />} />
