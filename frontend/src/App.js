@@ -7,6 +7,7 @@ import client from './libs/api/client';
 import GlobalStyle from './libs/styles/GlobalStyle';
 import DetailPage from './pages/DetailPage';
 import MainPage from './pages/MainPage';
+import MyPage from './pages/MyPage';
 import NaviPage from './pages/NaviPage';
 import WritePage from './pages/WritePage';
 
@@ -43,7 +44,6 @@ function App() {
       console.log("자동로그인중")
     }
   },[]);
-
   
 
   // 메인 데이터 불러오기
@@ -65,6 +65,7 @@ function App() {
           <Route path="/signin" element={<SigInContainer />} />
           <Route path="/signup" element={<SignUpContainer />} />
           <Route path="/write" element={<WritePage />} />
+          <Route path="/mypage" element={<MyPage user={user} />} />
         </Routes>
     </>
   );
