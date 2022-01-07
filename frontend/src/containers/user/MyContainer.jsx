@@ -5,14 +5,18 @@ import UserContext from '../../context/UserContext';
 import client from '../../libs/api/client';
 
 function MyContainer() {
-    const [myInput, setMyInput] = useState(null);
+    const [myInput, setMyInput] = useState({
+        password :"",
+        nickname :"",
+        imgURL : "",
+    });
     const [preview, setPreview] = useState('');
     const imgRef = useRef(null);
     const {user, setUser} = useContext(UserContext);
+    const [myPage, setMyPage] = useState(false);
     const navigate = useNavigate();
 
     useEffect(()=>{
-        setMyInput(user);
         setPreview(user ? user.imgURL : "")
     },[user])
 
@@ -34,6 +38,21 @@ function MyContainer() {
         })
 
         setPreview(imgURL)
+    }
+
+    const onClickPassword = async() =>{
+        
+        let res;
+        try {
+            res = await client.post(`/auth/${user._id}`, myInput)
+        } catch (error) {
+            console.log(error)
+            alert('비밀번호가 틀렸습니다')
+        }
+
+        if(res.status === 200) {
+            setMyPage(true)
+        }
     }
 
     const onClickPutBtn = async () => {
@@ -62,12 +81,14 @@ function MyContainer() {
     }
     return (
         <MyComponent
-        preview={preview}
-        imgRef={imgRef}
-        myInput={myInput}
-        onChangeImage={onChangeImage}
-        onChangeInput={onChangeInput}
-        onClickPutBtn={onClickPutBtn} />
+            myPage={myPage}
+            preview={preview}
+            imgRef={imgRef}
+            myInput={myInput}
+            onChangeImage={onChangeImage}
+            onChangeInput={onChangeInput}
+            onClickPutBtn={onClickPutBtn}
+            onClickPassword={onClickPassword} />
     )
 }
 

@@ -15,7 +15,7 @@ const mainModels = new Schema({
         required:true,
     },
     userId:{
-        type:mongoose.Schema.type.userId,
+        type:String,
         required : true,
         ref :'users'
     },

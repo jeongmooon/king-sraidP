@@ -1,7 +1,8 @@
 const userModels = require('../../../models/auth/user');
 const jwtModule = require('../../../modules/jwtMoudule');
+const { createHashedPassword } = require('../../../modules/passwrodModule');
 const passwordModule = require('../../../modules/passwrodModule');
-const {OK, DB_ERROR,OVER_ACCOUNT,NO_ACCOUNT, LOCK_ACCOUNT, OVER_PASSWORD} = require('../../../modules/stautsModule')
+const {OK, DB_ERROR,OVER_ACCOUNT,NO_ACCOUNT, LOCK_ACCOUNT, OVER_PASSWORD, NO_DATA} = require('../../../modules/stautsModule')
 
 
 const userController ={
@@ -29,7 +30,6 @@ const userController ={
 
             // salt 생성
             const salt = await passwordModule.createSalt()
-            console.log(salt)
 
             // 비밀번호 해쉬화
             const passwordN = passwordModule.createHashedPassword(password, salt)
@@ -39,6 +39,7 @@ const userController ={
                 userId,
                 email,
                 salt,
+                nickname : userId,
                 password : passwordN,
                 createDate : new Date(),
             })
@@ -128,6 +129,41 @@ const userController ={
             //아이디가 없다
             res.status(NO_ACCOUNT).json({
                 message:"아이디가 없습니다"
+            })
+        }
+    },
+
+    // 유저찾기
+    findUser : async(req, res)=>{
+        const { id } = req.params;
+        const {password} =req.body;
+        
+        try {
+            const userInfo = await userModels.findById(id);
+
+            if(userInfo === null){
+                res.status(NO_DATA).json({
+                    message:"데이터 없음"
+                })
+                return
+            }
+            
+            const salt = userInfo.salt;
+            const passwordN = createHashedPassword(password, salt)
+
+            if(passwordN === userInfo.password){
+                res.status(OK).json({
+                    message:"성공"
+                })
+            }
+            else{
+                res.status(NO_DATA).json({
+                    message:"실패"
+                })
+            }
+        } catch (error) {
+            res.status(DB_ERROR).json({
+                message:"DB에러"
             })
         }
     }

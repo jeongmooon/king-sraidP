@@ -109,43 +109,62 @@ const StyledButton = styled.div`
   }
 `;
 
-function MyComponent({preview, imgRef, myInput, onChangeImage, onChangeInput, onClickPutBtn}) {
+function MyComponent({myPage, preview, imgRef, myInput, onChangeImage, onChangeInput, onClickPutBtn, onClickPassword}) {
+    console.log(myInput)
     return (
         <MypageWrapper>
             <TilteWrapper>
                 <Title>회원 정보 수정</Title>
             </TilteWrapper>
-            <ImageChange onClick={()=> imgRef.current.click()}>
-                <img
-                className='image'
-                src={preview || ""}
-                alt='' />
-                <input
-                onChange={onChangeImage}
-                ref={imgRef}
-                type='file'
-                name='img'
-                hidden={true} />
-            </ImageChange>
-            <MyPageForm>
-                <FormText>
-                    <Label>아이디</Label>
-                    <StyledInput
-                        type='text'
-                        value={myInput ? myInput.userId : ""} />
-                </FormText>
-                <FormText>
-                    <Label>닉네임</Label>
-                    <StyledInput
-                        type='text'
-                        value={myInput ? myInput.nickname : ""}
-                        onChange={onChangeInput}
-                        name='nickname' />
-                </FormText>
-            </MyPageForm>
-            <div style={{display: "flex", justifyContent: "center"}}>
-                <StyledButton onClick={onClickPutBtn}>수정</StyledButton>
-            </div>
+            {myPage ? (
+                <>       
+                    <ImageChange onClick={()=> imgRef.current.click()}>
+                        <img
+                            className='image'
+                            src={preview || ""}
+                            alt='' />
+                        <input
+                            onChange={onChangeImage}
+                            ref={imgRef}
+                            type='file'
+                            name='img'
+                            hidden={true} />
+                    </ImageChange>
+                    <MyPageForm>
+                        <FormText>
+                            <Label>아이디</Label>
+                            <StyledInput
+                                type='text'
+                                value={myInput ? myInput.userId : ""} />
+                        </FormText>
+                        <FormText>
+                            <Label>닉네임</Label>
+                            <StyledInput
+                                type='text'
+                                value={myInput ? myInput.nickname : ""}
+                                onChange={onChangeInput}
+                                name='nickname' />
+                        </FormText>
+                    </MyPageForm>
+                    <div style={{display: "flex", justifyContent: "center"}}>
+                        <StyledButton onClick={onClickPutBtn}>수정</StyledButton>
+                    </div>
+                </>
+            ) : (
+                <>                    
+                    <MyPageForm>
+                        <FormText>
+                            <Label>비밀번호</Label>
+                            <StyledInput
+                                type='password'
+                                name="password"
+                                value={myInput.password}
+                                onChange={onChangeInput} />
+                            <StyledButton onClick={onClickPassword}>수락</StyledButton>
+                        </FormText>
+                    </MyPageForm>
+                </>
+            )}            
         </MypageWrapper>
     )
 }
