@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import NavbarComponent from '../../components/common/NavbarComponent'
+import UserContext from '../../context/UserContext';
 
-function NavbarContainer({isLogined}) {
+function NavbarContainer() {
     const navigate = useNavigate();
+    const {isLoggendIn} = useContext(UserContext);
 
     const logoClick = ()=>{
         navigate('/')
@@ -21,13 +23,18 @@ function NavbarContainer({isLogined}) {
         navigate('/write')
     }
 
+    const onClickMypage = () =>{
+        navigate('/mypage')
+    }
+
     return (
         <NavbarComponent
-            isLogined={isLogined}
+            isLoggendIn={isLoggendIn}
             onClickSignUp={onClickSignUp}
             onClickSignIn={onClickSignIn}
             logoClick={logoClick}
-            onClickWrite={onClickWrite} />
+            onClickWrite={onClickWrite}
+            onClickMypage={onClickMypage} />
     )
 }
 

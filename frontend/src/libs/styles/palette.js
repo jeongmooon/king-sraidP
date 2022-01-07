@@ -2,6 +2,7 @@
 
 const palette = {
     main: ["#464964"],
+    back: ["#fff"],
     gray: [
       "#f8f9fa",
       "#f1f3f5",

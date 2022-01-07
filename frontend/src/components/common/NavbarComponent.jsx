@@ -54,16 +54,16 @@ const StyledButton = styled.div`
   }
 `;
 
-function NavbarComponent({ onClickSignUp, onClickSignIn, logoClick, isLogined, onClickWrite }) {
+function NavbarComponent({ onClickSignUp, onClickSignIn, logoClick, isLoggendIn, onClickWrite, onClickMypage }) {
     return (
         <NavbarBlock>
             <NavbarWrapper>
                 <div className='left'>왼쪽</div>
                 <LogImage onClick={logoClick} src="blob:http://localhost:3000/59e9648d-499a-4ad4-8aa3-d7ff7159e985" alt="" />
-                {isLogined ? (
+                {isLoggendIn ? (
                     <div className='right'>
                         <StyledButton onClick={onClickWrite}>글쓰기</StyledButton>
-                        <StyledButton>마이페이지</StyledButton>
+                        <StyledButton onClick={onClickMypage}>마이페이지</StyledButton>
                     </div>
                 ) :(
                     <div className='right'>

@@ -1,9 +1,9 @@
 import React from 'react'
 import NavbarContainer from '../containers/common/NavbarContainer'
 
-function NaviPage({...rest}) {
+function NaviPage() {
     return (
-        <NavbarContainer {...rest} />
+        <NavbarContainer />
     )
 }
 

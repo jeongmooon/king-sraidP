@@ -1,9 +1,9 @@
 import React from 'react'
 import MyContainer from '../containers/user/MyContainer'
 
-function MyPage({user}) {
+function MyPage() {
     return (
-        <MyContainer user={user} />
+        <MyContainer />
     )
 }
 

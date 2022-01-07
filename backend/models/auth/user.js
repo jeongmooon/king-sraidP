@@ -7,6 +7,9 @@ const usersModels = new Schema({
       required: true,
       unique: true,
   },
+  nickname:{
+    type:String,
+  },
   // 비밀번호
   password: {
     type: String,
@@ -26,6 +29,10 @@ const usersModels = new Schema({
   signinCount:{
     type: Number,
     default:0
+  },
+  imgURL : {
+    type : String,
+    default:"",
   },
   // 잠굼 기능
   lockAccount:{

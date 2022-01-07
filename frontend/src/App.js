@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import SigInContainer from './containers/auth/user/SigInContainer';
 import SignUpContainer from './containers/auth/user/SignUpContainer';
+import UserContext from './context/UserContext';
 import client from './libs/api/client';
 import GlobalStyle from './libs/styles/GlobalStyle';
 import DetailPage from './pages/DetailPage';
@@ -15,35 +16,29 @@ function App() {
   const [mainData, setMainData] = useState([]);
 
   // 자동로그인
-  const [isLogined, setIsLogined] = useState(false);
-  const [user, setUser] = useState(null);
+  const {user, setUser, setIsLoggedIn} = useContext(UserContext);
+  const userInfo = user ? 1 :0;
 
   // 자동로그인
   useEffect(()=>{
-    const token = localStorage.getItem('accessToken')
-    ? localStorage.getItem('accessToken') : null;
+    const fetchUser = async() =>{
+      if(localStorage.getItem('accessToken')) {
+        const accessToken = localStorage.getItem('accessToken');
+        client.defaults.headers['Authorization'] = accessToken;
 
-    const test = async () =>{
-      client.defaults.headers['authorization'] = token;
-      console.log(token);
-      let result;
-
-      try {
-        result = await client.get('/user')
-      } catch (error) {
-        console.log('토큰에러>>>>', error)
+        let res;
+        try {
+          res = await client.get('/user')
+        } catch (error) {
+          console.log('토큰에러>>>>', error)
+        }
+        setUser(res.data.data)
+        setIsLoggedIn(true)
       }
-
-      const targetUser = result.data.data;
-      setIsLogined(true);
-      setUser(targetUser)
     }
 
-    if(token){
-      test();
-      console.log("자동로그인중")
-    }
-  },[]);
+    fetchUser();
+  },[userInfo, setUser, setIsLoggedIn]);
   
 
   // 메인 데이터 불러오기
@@ -57,7 +52,7 @@ function App() {
   }
   return (
     <>
-      <NaviPage isLogined={isLogined} />
+      <NaviPage />
       <GlobalStyle />
         <Routes>
           <Route path="/" element={<MainPage mainData={mainData} />} />
@@ -65,7 +60,7 @@ function App() {
           <Route path="/signin" element={<SigInContainer />} />
           <Route path="/signup" element={<SignUpContainer />} />
           <Route path="/write" element={<WritePage />} />
-          <Route path="/mypage" element={<MyPage user={user} />} />
+          <Route path="/mypage" element={<MyPage />} />
         </Routes>
     </>
   );
