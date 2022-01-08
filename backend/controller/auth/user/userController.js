@@ -166,6 +166,34 @@ const userController ={
                 message:"DB에러"
             })
         }
+    },
+
+    updateUser : async (req, res) => {
+        const { id } = req.params;
+        const { nickname } = req.body;
+
+        console.log(req.file)
+
+        let imgURL;
+        if(req.file) {
+            imgURL = req.file.location;
+        }
+
+        try {
+            await userModels.findByIdAndUpdate(id, {
+                nickname,
+                imgURL
+            })
+
+            res.status(OK).json({
+                messgae: "유저정보 수정 성공",
+                imgURL
+            })
+        } catch (error) {
+            res.status(DB_ERROR).json({
+                message : "DB 서버 에러"
+            })
+        }
     }
 }
 
