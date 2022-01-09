@@ -64,7 +64,7 @@ function MyContainer() {
 
         let res;
         try {
-            res = await client.put(`/user/${user.id}`, formData)
+            res = await client.put(`/auth/${user._id}`, formData)
         } catch (error) {
             console.log('회원정보 업로드 실패>>>', error)
         }
@@ -81,6 +81,7 @@ function MyContainer() {
     }
     return (
         <MyComponent
+            user={user}
             myPage={myPage}
             preview={preview}
             imgRef={imgRef}

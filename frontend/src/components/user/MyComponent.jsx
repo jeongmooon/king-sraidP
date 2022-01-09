@@ -109,8 +109,8 @@ const StyledButton = styled.div`
   }
 `;
 
-function MyComponent({myPage, preview, imgRef, myInput, onChangeImage, onChangeInput, onClickPutBtn, onClickPassword}) {
-    console.log(myInput)
+function MyComponent({user, myPage, preview, imgRef, myInput, onChangeImage, onChangeInput, onClickPutBtn, onClickPassword}) {
+    console.log(user)
     return (
         <MypageWrapper>
             <TilteWrapper>
@@ -135,14 +135,15 @@ function MyComponent({myPage, preview, imgRef, myInput, onChangeImage, onChangeI
                             <Label>아이디</Label>
                             <StyledInput
                                 type='text'
-                                value={myInput ? myInput.userId : ""} />
+                                value={user.userId} />
                         </FormText>
                         <FormText>
                             <Label>닉네임</Label>
                             <StyledInput
                                 type='text'
-                                value={myInput ? myInput.nickname : ""}
+                                value={myInput.nickname}
                                 onChange={onChangeInput}
+                                placeholder={user.nickname}
                                 name='nickname' />
                         </FormText>
                     </MyPageForm>

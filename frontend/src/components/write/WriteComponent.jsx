@@ -12,6 +12,13 @@ const WriteWrap = styled.div`
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 `
 
+const CategorySelect = styled.select`
+    font-size: 1.5rem;
+    outline: none;
+    width: 100%;
+    margin-bottom: 1rem;
+`
+
 const TitleInput = styled.input`
     font-size: 1.5rem;
     font-weight: bolder;
@@ -70,6 +77,11 @@ function WriteComponent({onChangeBody}) {
         <br/><br /><br />
         <br/><br /><br />
         <WriteWrap>
+            <CategorySelect>
+                <option value="1">이벤트</option>
+                <option value="2">자유게시판</option>
+                <option value="3">결투장</option>
+            </CategorySelect>
             <TitleInput
             name='tilte'
             value={''}
