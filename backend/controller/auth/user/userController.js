@@ -172,8 +172,6 @@ const userController ={
         const { id } = req.params;
         const { nickname } = req.body;
 
-        console.log(req.file)
-
         let imgURL;
         if(req.file) {
             imgURL = req.file.location;

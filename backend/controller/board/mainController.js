@@ -5,46 +5,33 @@ const { OK, DB_ERROR, NO_DATA, NO_ACCOUNT } = require('../../modules/stautsModul
 const mainController ={
     // 글쓰기
     createMainPost : async (req,res)=>{
-        const { title, _id, contents, category, imgURL}= req.body
+        const { title, _id, contents, category}= req.body
 
-        // 유저 정보 찾기
-        try {
-            const userInfo = await userModels.findById({_id})
-            if(userInfo){
-                // 찾은 유저정보로 아이디 찾기
-                const userId = userInfo.userId
-    
-                // 데이터 저장하기
-                const post = new mainModels({
-                    title,
-                    contents,
-                    userId,
-                    imgURL,
-                    category,
-                    createDate : new Date()
-                })
-
-                try {
-                    await post.save()
-                    res.status(OK).json({
-                        message:"저장 성공"
-                    })
-                } catch (error) {
-                    res.status(DB_ERROR).json({
-                        message:"post저장 DB에러"
-                    })
-                }
-            } else{
-                // obj아이디 없다면
-                res.status(NO_ACCOUNT).json({
-                    message:"아이디가 없음"
-                })
-            }
-        } catch (error) {
-            console.log(error)
-            return
+        let imgURL;
+        if(req.file) {
+            imgURL = req.file.location;
         }
 
+        const post = new mainModels({
+            title,
+            writer: _id,
+            contents,
+            category,
+            imgURL,
+            createDate
+        })
+
+        try {
+            const postData = await post.save();
+            res.json(OK).json({
+                message : "게시물 생성 완료",
+                post : postData
+            })
+        } catch (error) {
+            res.status(DB_ERROR).json({
+                message : "DB 서버 에러"
+            })
+        }
     },
 
     // 리스트 불러오기

@@ -14,8 +14,8 @@ const mainModels = new Schema({
         type:String,
         required:true,
     },
-    userId:{
-        type:String,
+    writer:{
+        type:mongoose.Schema.Types.ObjectId,
         required : true,
         ref :'users'
     },
