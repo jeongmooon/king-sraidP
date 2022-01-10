@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import SignInComponent from '../../../components/auth/user/SignInComponent'
+import UserContext from '../../../context/UserContext';
 import client from '../../../libs/api/client';
 
 function SigInContainer() {
     const navigate = useNavigate();
+    const {user, setUser, setIsLoggedIn} = useContext(UserContext);
     const [userInfo, setUserInfo] = useState({
         userId : "",
         password : "",
@@ -36,6 +38,7 @@ function SigInContainer() {
       };
       try {
         const response = await client.post("/auth/signin", userData);
+        console.log(response)
         if (response.status === 200) {
           const { accessToken } = response.data;
 
@@ -43,24 +46,17 @@ function SigInContainer() {
           localStorage.setItem("accessToken", accessToken);
           client.defaults.headers.common["authorization"] = `${accessToken}`;
 
-          let result;
           try {
-            result = await client.get("/user");
+            const res = await client.get('/user')
+            
+            setUser(res.data.data)
+            setIsLoggedIn(true);
+            alert("로그인 완료");
+            navigate("/");
+
           } catch (error) {
-            console.log("토큰로그인에러 >>>>", error);
+            return alert(error.response.data.message)
           }
-
-          const targetUser = result.data.data;
-          console.log(targetUser);
-
-          //데이터 왔나 체크
-          //   console.log("데이터 체크 >>>", targetUser);
-
-        //   setAdmin(targetUser);
-        //   setIsAdminLogined(true);
-
-          alert("로그인 완료");
-          navigate("/");
         }
       } catch (error) {
         console.log("로그인 에러>>", error);
