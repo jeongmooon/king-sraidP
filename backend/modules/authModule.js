@@ -4,8 +4,6 @@ const jwtModule = require('./jwtMoudule')
 const authModule = {
   loggedIn: async (req, res, next) => {
     const accessToken = req.headers.authorization;
-    console.log(accessToken)
-
     if (!accessToken) {
       res.status(409).json({
         msessage: "토큰 없음",
@@ -14,7 +12,6 @@ const authModule = {
     }
 
     const decoded = jwtModule.verify(accessToken);
-    console.log(decoded)
     if (decoded === -1) {
       return res.status(409).json({
         message: "만료된 토큰 입니다",

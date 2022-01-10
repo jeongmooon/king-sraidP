@@ -3,6 +3,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
 import palette from '../../libs/styles/palette';
+import EditImage from '../common/image/EditImage';
 
 const WriteWrap = styled.div`
     margin-top: 5rem;
@@ -38,8 +39,13 @@ const QuillWrapper = styled.div`
     }
 `
 
+function WriteComponent({
+    onChangeBody,
+    onChangeTitle,
+    onChangeImg,
+    writeInfo,
+    imgURL}) {        
 
-function WriteComponent({onChangeBody}) {
     const modules = {
       toolbar: [
         [{ header: [1, 2, false] }],
@@ -83,16 +89,17 @@ function WriteComponent({onChangeBody}) {
                 <option value="3">결투장</option>
             </CategorySelect>
             <TitleInput
-            name='tilte'
-            value={''}
-            placeholder='제목' />
+                name="title"
+                value={writeInfo.title}
+                onChange={onChangeTitle}
+                placeholder='제목' />
             <QuillWrapper>
                 <ReactQuill
                     name ="contents"
                     theme='snow'
                     modules={modules}
                     formoats={formats}
-                    value={''}
+                    value={writeInfo.contents}
                     onChange={(content, delta, source, editor)=>{
                         if(source === "user") {
                             onChangeBody(editor.getHTML());
@@ -100,6 +107,7 @@ function WriteComponent({onChangeBody}) {
                     }}
                 />
             </QuillWrapper>
+            <EditImage imgURL={imgURL} onChangeImg={onChangeImg} />
         </WriteWrap>
         </>
     )

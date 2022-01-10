@@ -67,7 +67,7 @@ function NavbarComponent({
         <NavbarBlock>
             <NavbarWrapper>
                 <div className='left'>왼쪽</div>
-                <LogImage onClick={logoClick} src="blob:http://localhost:3000/59e9648d-499a-4ad4-8aa3-d7ff7159e985" alt="" />
+                <LogImage onClick={logoClick} src="" alt="" />
                 {isLoggendIn ? (
                     <div className='right'>
                         <div>{user.nickname}</div>                        

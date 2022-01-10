@@ -4,8 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
-import WriteProvider from './context/providers/WriteProvider';
 import UserProvider from './context/providers/UserProvider';
+import WriteProvider from './context/providers/WriteProvider';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,7 +13,7 @@ ReactDOM.render(
       <WriteProvider>
         <UserProvider>
           <App />
-        </UserProvider>
+        </UserProvider>        
       </WriteProvider>
     </BrowserRouter>
   </React.StrictMode>,

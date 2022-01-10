@@ -46,17 +46,18 @@ function SigInContainer() {
           localStorage.setItem("accessToken", accessToken);
           client.defaults.headers.common["authorization"] = `${accessToken}`;
 
+          console.log(accessToken)
           try {
             const res = await client.get('/user')
-            
+            console.log(res)
             setUser(res.data.data)
             setIsLoggedIn(true);
             alert("로그인 완료");
-            navigate("/");
 
           } catch (error) {
             return alert(error.response.data.message)
           }
+          navigate("/");
         }
       } catch (error) {
         console.log("로그인 에러>>", error);

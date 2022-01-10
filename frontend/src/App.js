@@ -50,6 +50,7 @@ function App() {
       const response = await client.get("/main");
       setMainData(response.data.dataList)
   }
+  
   return (
     <>
       <NaviPage />

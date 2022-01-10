@@ -28,7 +28,6 @@ const adminController ={
 
             // salt 생성
             const salt = await passwordModule.createSalt()
-            console.log(salt)
 
             // 비밀번호 해쉬화
             const passwordN = passwordModule.createHashedPassword(password, salt)

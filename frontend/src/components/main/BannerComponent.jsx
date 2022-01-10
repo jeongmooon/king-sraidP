@@ -19,7 +19,7 @@ const BannerImg = styled.img`
 function BannerComponent() {
     return (
         <BannerBlock>
-            <BannerImg src="blob:http://localhost:3000/545a7554-331f-48fc-a5f5-502a2dfa4e85" alt='' />
+            <BannerImg src="" alt='' />
         </BannerBlock>
     )
 }
