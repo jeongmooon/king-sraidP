@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import WriteComponent from '../../components/write/WriteComponent'
 import UserContext from '../../context/UserContext';
 import WriteContext from '../../context/WriteContext'
@@ -41,14 +41,16 @@ function WriteContainer() {
             _id : user._id,
         })
     }
-    console.log(writeInfo)
+
     return (
-        <WriteComponent
-            onChangeTitle={onChangeTitle}
-            onChangeImg={onChangeImg}
-            onChangeBody={onChangeBody}
-            writeInfo={writeInfo}
-            imgURL={imgInfo.imgURL} />
+        <>
+            <WriteComponent
+                onChangeTitle={onChangeTitle}
+                onChangeImg={onChangeImg}
+                onChangeBody={onChangeBody}
+                writeInfo={writeInfo}
+                imgURL={imgInfo.imgURL} />
+        </>
     )
 }
 
