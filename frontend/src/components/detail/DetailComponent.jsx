@@ -33,10 +33,16 @@ const MainContentWrap = styled.div`
   padding-bottom: 20px;
 `;
 
+const detailImg = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
 function DetailComponent({ detailData }) {
     return (
         <DetailBlock>
             <MainTitle>{detailData.title}</MainTitle>
+            <detailImg src={detailData.imgURL} alt="" />
             <MainContentWrap>
                 <div dangerouslySetInnerHTML={{__html:detailData.contents}} />
             </MainContentWrap>
