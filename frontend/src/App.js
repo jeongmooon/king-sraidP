@@ -10,6 +10,7 @@ import DetailPage from './pages/DetailPage';
 import MainPage from './pages/MainPage';
 import MyPage from './pages/MyPage';
 import NaviPage from './pages/NaviPage';
+import SubDetailPage from './pages/SubDetailPage';
 import WritePage from './pages/WritePage';
 
 function App() {
@@ -62,6 +63,7 @@ function App() {
           <Route path="/signup" element={<SignUpContainer />} />
           <Route path="/write" element={<WritePage />} />
           <Route path="/mypage" element={<MyPage />} />
+          <Route path="/subdetail" element={<SubDetailPage />} />
         </Routes>
     </>
   );
