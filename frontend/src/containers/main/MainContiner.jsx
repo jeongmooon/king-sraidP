@@ -15,10 +15,7 @@ function MainContiner({mainData}) {
     
     return (
         <>
-            <BannerComponent />
-            <ChatContainer />
             <MainComponet mainData={mainData} onClickItem={onClickItem} />
-            <FooterContainer />
         </>
     )
 }
