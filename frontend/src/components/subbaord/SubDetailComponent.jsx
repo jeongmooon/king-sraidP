@@ -13,9 +13,9 @@ const SubDetailBlock = styled.div`
 
 function SubDetailComponent() {
     return (
-        <div>
+        <SubDetailBlock>
             
-        </div>
+        </SubDetailBlock>
     )
 }
 
