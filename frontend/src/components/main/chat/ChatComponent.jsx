@@ -53,7 +53,7 @@ const ChatBotton = styled.button`
     font-size: 1px;
 `
 
-function ChatComponent() {
+function ChatComponent({onClickChat}) {
     return (
         <ChatBlock>
             <ChatBox>
@@ -62,7 +62,7 @@ function ChatComponent() {
                     <UserContent>됨?</UserContent>
                 </ChatContent>
                 <ChatArea>
-                    <ChatBotton>전송</ChatBotton>
+                    <ChatBotton onClick={onClickChat}>전송</ChatBotton>
                     <ChatInput />
                 </ChatArea>
             </ChatBox>
