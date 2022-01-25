@@ -337,7 +337,153 @@ public class MyClass {
     }
   }
   ```
+  
+### 반복문
+  - for while do-while
+  - 조건이 참인 동안 계속 실행한다
+  - 초기식; 조건식; 증강식
+  - ~에서부터 시작 ~까지 실행한다.
+  - 실행동안 ~씩 변한다(증강식)
+  - 멈추는 조건, 상황 필수
+  
+  ex)
+  ```
+  for( int i=0; i<5 i+=1 ) {
+    Syetem.out.println(i);
+  }
+  ```
+  
+  - 하나씩 꺼내는 식
+  - for-each
+  
+  ex)
+  ```
+  for(int x : li){
+  
+  }
+  ```
 
+  ex) 5개씩 행을 끊어서 숫자를 나열
+  
+  ```
+  public class MyClass {
+    public static void main(String args[]) {
+      
+      // 1~25까지 연속하는 정수를 출력하세요
+      for (int n=1; n<26; n+=1){
+          System.out.print(n+" ");
+      }
+      System.out.println();
+      
+      // 1~25 연속 정수 출력 -1행당 5개씩
+      // 5의 배수 X
+      int count = 0; // 각행에서 출력 개수
+      for(int n=12; n<63; n+=1){
+          System.out.print(n + " ");
+          count += 1;
+          if(count == 5){
+            System.out.println();
+            count = 0; // 늘어난 숫자 값을 초기화
+        }}
+        // i번당 k번 반복 실행
+        int num = 1;
+        for( int i=0; i<5; i+=1){
+            for(int k=1; k<=5; k+=1){
+                System.out.print( i*5 + k + " ");
+                // System.out.print(num + " ");
+                // num +=1;
+            }
+            System.out.println();
+        }
+        
+      
+    }
+  }
+  ```
+  
+  ex) 실수값을 세자리정수로 만들고 각자리 숫자를 합해서 짝수면 출력
+  ```
+  public class MyClass {
+    public static void main(String args[]) {
+      // 임의의 실수 값 받는다.
+      double ran = Math.random();
+      System.out.println(ran);
+      
+      // 이것을 정수로 변환
+      int min = 100;
+      int max = 999;
+      int num = (int)(ran*10000 %(max-min+1)+min);
+      System.out.println(num);
+      
+      int temp = num;
+      int sum = 0;
+      for(; temp > 0; temp /=10){
+          int d3 = temp % 10;
+          sum += d3;
+      }
+      
+      if(sum%2 == 0){
+          System.out.println(num + " => " + sum);
+      } else {
+          System.out.println("error");
+      }
+    }
+  }
+  ```
+
+  ex) 세자리숫자가 연속된 숫자면 출력
+  ```
+  public class MyClass {
+    public static void main(String args[]) {
+      // 임의의 실수 값 받는다.
+      double ran = Math.random();
+      
+      // 이것을 정수로 변환
+      int min = 100;
+      int max = 999;
+      int num = (int)(ran*10000 %(max-min+1)+min);
+      
+      // 세자리 정수 : 각자리 값이 크기 순으로 연속하는지 판단
+      int d1 = num / 100;
+      int d2 = num / 10 % 10;
+      int d3 = num % 10;
+      if(d1+1 == d2 && d2+1 == d3){
+          System.out.println(num);
+      } else{
+          System.out.println(num + "=> 비연속");
+      }
+    }
+  }
+  ```
+  
+  - 세가지 반복문 차이
+  - 
+  ```
+  public class MyClass {
+    public static void main(String args[]) {
+      
+      // for문
+      int n = 1;
+      for(; n<5; n+=1){
+      }
+      
+      // while문
+      // 조건식을 먼저 실행
+      int m = 0;
+      while( m < 5 ){
+          m+=1;
+      }
+      
+      // do while문
+      // 일단 한번은 무조건 실행
+      do{
+          // 실행 값
+          // 파일접근, 키보드 입력 유효검사
+      } while();
+    }
+  }
+  ```
+  
 ## Python 3
 
 ### 프로그래밍해서 프로그램을 실행시키는 방식
@@ -353,4 +499,14 @@ public class MyClass {
   ```
   if 조건식:
     참일 때 실행 될 내용
+  ```
+
+### 반복문
+  - range(x, y, z)
+  - x는 최소값, y는 최고값, z는 증강값
+
+  - 1~25까지 한줄 출력하기
+  ```
+ for n in range(1,26) :
+        print(n, end=", "
   ```
