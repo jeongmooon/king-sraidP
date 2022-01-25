@@ -248,6 +248,96 @@ public class MyClass {
 }
 ```
 
+### 조건 실행문
+  - 조건이 참이라면 실행한다.
+  - 문(statement) : 식들의 모음
+  ```
+  if(){
+    내용
+  }
+  ```
+  
+  ex) 일부분 골라내기
+  ```
+  if(80<= A && A <90) {
+    // 일부분만 골라 내는것
+  }
+  
+  if(A>=90){
+    // 숫자적으로 구분
+  }
+  ```
+  
+  ex) switch문
+  ```
+  // 변환표, 매핑(mapping)에서 사용
+  // 입력값 => 변환 => 변환값 출력
+  int day = 0;
+  String wday = ""; //빈문자열
+  
+  switch(){
+    // 값에 따라 실행할 부분 선택
+    case 0 : 
+      wday = "일요일";
+      break;
+    case 1 : 
+      wday = "월요일";
+      break;
+    case 2 : 
+      wday = "화요일";
+      break;
+    case 3 : 
+      wday = "수요일";
+      break;
+    case 4 : 
+      wday = "목요일";
+      break;
+    case 5 : 
+      wday = "금요일";
+      break;
+    case 6 : 
+      wday = "토요일";
+      break;
+  }
+  System.out.println( wday );
+  ```
+  
+  ex) switch로 점수 ABCF 주기
+  
+  ```
+  // case는 break가 없으면 아래로 내려감
+  
+  public class MyClass {
+    public static void main(String args[]) {
+      
+      int score = 26;
+      // 90 A , 70~89 B, 50~69 C, F
+      String grade = "";
+      
+      switch (score/10) {
+          case 10:
+          case 9 :
+              wday = "A";
+              break;
+          case 8 :
+          case 7 :
+              wday = "B";
+              break;
+          case 6 :
+          case 5 :
+              wday = "C";
+              break;
+          case 4 :
+              wday = "F";
+          default :
+              wday = "F";
+      }
+      
+      System.out.println( grade );
+    }
+  }
+  ```
+
 ## Python 3
 
 ### 프로그래밍해서 프로그램을 실행시키는 방식
@@ -258,3 +348,9 @@ public class MyClass {
   - a = 10
     b = 12.34
     c = 'james'
+
+### 조건 실행문
+  ```
+  if 조건식:
+    참일 때 실행 될 내용
+  ```
