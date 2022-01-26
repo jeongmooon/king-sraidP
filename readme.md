@@ -573,4 +573,76 @@ public class MyClass {
   }
   ```
   
+  
+  - CRUD
+  
+  ```
+  public class MyClass {
+    public static void main(String args[]) {
+      // 배열 선언 : 정적, 명시적
+      int[] ar = new int[10];
+      
+      // CRUD 구현
+      int idx = 0;
+      {
+          // 추가하기 : index번호 알아야함 => 중복여부 체크
+          int value = 100;
+          ar[idx] = value;
+          idx += 1;
+      }
+      
+      {
+          // 삭제하기 : index번호 알아야함, 빈 요소 처리
+          int delete = 0; // 삭제할 요소의 번호
+          ar[delete] = 0;
+          idx -= 1;
+      }
+      
+      {
+          // 삽입하기 : index번호 알아야함, 밀기, 당기기
+          int insert = 0; // 삽입될 요소
+          int value = 100;
+          ar[insert] = value;
+          idx +=1;
+      }
+      
+      {
+          // 수정하기 : index번호 알아야함, => 값이 존재해야함
+          int edit = 1;
+          int value = 200;
+          ar[edit] =value;
+      }
+      
+      {
+          // 검색하기 - 1 : 값을 주고 요소번호를 찾는다
+          int key = 100; // 찾을 값
+          for(int i=0; i<ar.length; i+=1){
+              if(key == ar[i]){
+                System.out.print(i+"번 요소");
+                // 중복 없음이라면 : 1개만 찾으면 된다
+                break;
+              }
+          }
+          System.out.print("\n");
+      }
+      
+      {
+          // 검색하기 - 2 : 요소번호를 주고 값을 꺼낸다
+          int no = 2; // 찾을 요소 번호
+          int result = ar[no];
+          
+          System.out.print(result + "\n");
+      }
+      
+      {
+          // 목록보기 : 저장된 값만 출력
+          for(int i=0; i<ar.length; i+=1){
+              System.out.print(ar[i]+",");
+          }
+          System.out.print("\n");
+      }
+    }
+  }
+  ```
+
   ## Python
