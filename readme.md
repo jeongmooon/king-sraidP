@@ -644,5 +644,285 @@ public class MyClass {
     }
   }
   ```
+  
+  - CRUD 루프 최종본
+  
+  ```
+  public class MyClass {
+    public static void main(String args[]) {
+      // 배열 선언 : 정적, 명시적
+      int[] ar = new int[10];
+      
+      // CRUD 구현
+      int loop = 5;
+      int idx = 0;
+      while( loop > 0 ){
+          
+          loop -= 1;
+          {
+              // 추가하기 : index번호 알아야함 => 중복여부 체크
+              if(idx < ar.length){
+                  int value = 100;
+                  ar[idx] = value;
+                  idx += 1;
+              } else {
+                  System.out.println("array full");
+              }
+          }
+          
+          {
+              // 삭제하기 : index번호 알아야함, 빈 요소 처리
+              // 연속상태를 위해서 당겨올 예정
+              int delete = 0; // 삭제할 요소의 번호
+              
+              // 인접요소로 당겨 채우기
+              for(int i=delete; i<ar.length-1; i+=1){
+                  ar[i] = ar[i+1];
+                  // 9를 초과해서는 안됨 i는 8까지만 됨
+              }
+              // 개수가 줄었다. - 마지막 한 칸이 빈다.
+              idx -= 1;
+          }
+          
+          {
+              // 삽입하기 : index번호 알아야함, 밀기, 당기기
+              if(idx<ar.length){
+                  int insert = 0; // 삽입될 요소
+                  int value = 100;
+                  
+                  for(int i = idx; i>insert; i-=1){
+                      ar[i] = ar[i-1];
+                  }
+                  
+                  ar[insert] = value;
+                  idx +=1;
+              }
+          }
+          
+          {
+              // 수정하기 : index번호 알아야함, => 값이 존재해야함
+              int edit = 1;
+              int value = 200;
+              if(edit < idx){
+                  // 바꾼다 덮어쓴다
+                  ar[edit] =value;
+              }
+          }
+          
+          {
+              // 검색하기 - 1 : 값을 주고 요소번호를 찾는다
+              int key = 100; // 찾을 값
+              for(int i=0; i<ar.length; i+=1){
+                  if(key == ar[i]){
+                    System.out.print(i+"번 요소");
+                    // 중복 없음이라면 : 1개만 찾으면 된다
+                    break;
+                  }
+              }
+              System.out.print("\n");
+          }
+          
+          {
+              // 검색하기 - 2 : 요소번호를 주고 값을 꺼낸다
+              int no = 2; // 찾을 요소 번호
+              int result = ar[no];
+              
+              System.out.print(result + "\n");
+          }
+          
+          {
+              // 목록보기 : 저장된 값만 출력
+              for(int i=0; i<ar.length; i+=1){
+                  System.out.print(ar[i]+",");
+              }
+              System.out.print("\n");
+          }
+      }
+    }
+  }
+  ```
+  
+  - 키보드 입력 처리
+  ```
+  import java.util.Scanner;
 
+  public class MyClass {
+      public static void main(String args[]) {
+          // 키보드 입력 처리
+          Scanner kb = new Scanner(System.in);
+          String s= kb.nextLine();
+          System.out.println(s);
+      }
+  }
+  ```
+  
+  - 키보드 입력처리 + CRUD
+
+  ```
+  import java.util.Scanner;
+
+public class MyClass {
+    
+    public static void main(String args[]) {
+        // 키보드 입력 처리 - 키보드와 연결한다...
+        Scanner kb = new Scanner( System.in );
+        //----------------------------------------
+        // 배열 선언 : 정적, 명시적
+        int[] ar = new int[10];
+
+        // Create Read Update Delete
+        int loop = 5;
+        int idx = 0;    // 매번 새로 생성할 변수?
+        // 지역성: 변수의 값이 유지? 매번 새로 생성?
+        while( loop > 0 ){//start while
+            loop -= 1;
+            System.out.println("1.추가, 2.삭제, 3.삽입, 4.수정, 5.검색");
+            String menu = kb.nextLine();
+            
+            if( menu.equals("1") ){
+                // 추가하기 : 번호? 저장할 값 -> 중복 여부 ?
+                if( idx < ar.length ){
+                    System.out.println("저장할값 ? ");
+                    String t = kb.nextLine();
+                    int value = Integer.parseInt(t);// 숫자열 -> 정수
+                    ar[ idx] = value;
+                    idx += 1;
+                }else{
+                    System.out.println("array full");
+                }
+            }
+            
+            if( menu.equals("2") ){
+                // 삭제하기 : 번호? 빈 요소 처리? 연속상태
+                System.out.println("삭제할 요소번호 ? ");
+                String t = kb.nextLine();
+                int delete = Integer.parseInt(t);// 숫자열 -> 정수
+                // 인접요소로 당겨 채운다....
+                for(int i=delete; i < ar.length-1 ;i+=1){
+                    ar[i] = ar[i+1];// 
+                }
+                // 개수가 줄었다. - 마지막 한 칸이 빈다.
+                idx -= 1;
+            }
+            
+            if( menu.equals("3") ){
+                // 삽입하기 : 번호? 빈 요소 밀기...
+                if( idx < ar.length ){
+                    System.out.println("삽입할 요소의 번호 ? ");
+                    String t = kb.nextLine();
+                    int insert = Integer.parseInt(t);// 숫자열 -> 정수
+
+                    System.out.println("저장할 값 ? ");
+                    String t1 = kb.nextLine();
+                    int value = Integer.parseInt(t1);// 숫자열 -> 정수
+                    
+                    for(int i=idx; i > insert; i-=1){
+                        ar[i] = ar[i-1];
+                        // [9]-----> <insert>
+                    }
+                    ar[ insert ] = value;
+                    idx += 1;
+                }
+            }
+            
+            if( menu.equals("4") ){
+                // 수정하기 : 번호? 저장할 값 -> 있어야 한다.
+                System.out.println("수정할 요소의 번호 ? ");
+                String t = kb.nextLine();
+                int edit = Integer.parseInt(t);// 숫자열 -> 정수
+
+                System.out.println("저장할 값 ? ");
+                t = kb.nextLine();
+                int value = Integer.parseInt(t);// 숫자열 -> 정수
+                
+                if( edit < idx ){
+                    // 바꾼다. 덮어쓴다.
+                    ar[ edit ] = value;
+                }
+            }
+            
+            if( menu.equals("5") ){
+                // 검색하기-1 -> 값을 주고 요소번호 찾는다.
+                System.out.println("찾을 값 ? ");
+                String t = kb.nextLine();
+                int key = Integer.parseInt(t);// 숫자열 -> 정수
+                for(int i=0; i < idx; i+=1){// 실제 데이터 개수만
+                    if( key == ar[i] ){
+                        System.out.print( i+"번 요소" );
+                        // 중복없음: 1개만 찾으면 된다.
+                        break;
+                    }
+                }
+                System.out.print("\n");// \t
+                
+            }
+    
+            // {
+            //     // 검색하기-2 -> 요소번호 주고 값을 꺼낸다.
+            //     int no = 2;// 찾을 요소번호
+            //     int result = ar[no];
+            //     System.out.print(result+"\n");
+            // }
+            
+            {
+                // 목록보기 -> 저장된 값만 출력
+                for(int i=0; i < ar.length; i+=1){
+                    System.out.print(ar[i]+" ");
+                }
+                System.out.print("\n");// \t
+            }
+            
+        }// end while        
+
+        //----------------------------------------
+    }// main 함수
+  }// class 
+
+  ```
+  
+  - 배열(주차장에 주차할수 있나 없나)
+  
+  ```
+  public class MyClass {
+    
+    public static void main(String args[]) {
+        // // 배열 [] - 요소번호로 제어한다... 길이를 확인하자
+        // // 기능 : 수정, 삭제 => 검색이 선행
+        // // 검색 : 결과 => 있다 => 1개여야한다.
+        // // 추가, 삭제, 삽입
+        
+        // 주차장 : 주차를 10대가 가능
+        int[] arr = new int[10];
+        for (int i=0; i<arr.length; i+=1){
+            // 0 : 빈자리, 1 : 주차됨
+            System.out.println(arr[i]);
+        }
+        
+        int r = -1;
+        for (int i=0; i<arr.length; i+=1){
+            if( arr[i] == 0 ){
+                arr[i] = 1;
+                r= i;
+                break;
+            }
+        }
+        
+        if( r != -1 ){
+            System.out.println("주차 했음");
+        }else{
+            System.out.println("주차 실패");
+        }
+    }// main 함수
+  }// class 
+  ```
+  
   ## Python
+  
+  - 키보드 입력 처리
+  ```
+  s = input();
+  a = int(s)
+  print(s, type(s))
+
+  print(a, type(a))
+  ```
