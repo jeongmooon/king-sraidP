@@ -926,3 +926,200 @@ public class MyClass {
 
   print(a, type(a))
   ```
+
+
+
+# 2022-01-27
+
+## 함수들이 돌아가는 시냅스(쪼개서 만들어라 => 유지보수 때문)
+  - 1. 사용자가 입력한 내용은 평문(플레인)
+  - 2. 이것이 정상적인지 필터링을 함(정상이라면 3, 비정상이라면 2-1)
+    - 2-1. 되돌려보냄
+  - 3. 정상이라면 암호화를 함
+  - 4. 데이터를 처리함 ...
+  
+## Java
+
+- 함수
+```
+public class MyClass {
+    public static void main(String args[]) // 함수의선언부 {
+        
+    }
+    /* 반환형 함수명(변수명 - 매개변수) // 함수의 선언
+        // void는 함수에만 붙일 수 있다.
+        { // 함수 구현부(body)
+            반환형이 void가  반드시 return 있어야 한다.
+            => return 이후의 문장은 실행되지 않는다.
+        }
+    */
+}
+```
+
+- 함수 기본 문법
+```
+public class MyClass {
+    // public은 접근 제한자
+    public static void main(String args[]) { // 호출자(측)
+        // fn함수를 호출한다.
+        // 전달한다. 호출측 => 피호출측 준다.
+        // 호출하려는 함수에 매개변수가 있다면, 호출 시 반드시 전달해야 함
+        fn( 3 ); // 피호출자(측) // 컨택스트 스위칭(문맥 교환)
+        
+        // 호출측, 피호출자가 반환하는 값을 선택적으로 받는다.
+        String rs = fn(8);
+        System.out.println(rs);
+    }// end main
+    
+    public static String fn( int param ) {
+        // void는 return 옆에 반환값을 적으면안된다.(반환값이 없다는 뜻이기 때문)
+        System.out.println("완료");
+        
+        return "HI";
+    } 
+}
+```
+
+- 함술 표 만들기
+```
+public class MyClass {
+    // public은 접근 제한자
+    public static void main(String args[]) { 
+        
+        for(int i=0; i<3; i+=1){
+            printArr(5,8);
+            System.out.println("--------");
+        }
+    }// end main
+    
+    public static void printArr(int row, int col){
+        for(int i=0; i<row; i+=1){
+            printLine(col);
+        }
+    }
+    
+    public static void printLine( int length ) {
+        for(int i=0; i< length; i+=1){
+            System.out.print('O'); // '' => char , "" =>String
+        }
+        System.out.println();
+    } 
+}
+```
+
+- 학생점수 구하기
+
+```
+public class MyClass {
+    // public은 접근 제한자
+    public static void main(String args[]) { 
+        // 함수 scope, 지역성
+        int[] score = new int[ 5 * 4 ];
+        
+        for(int i=0; i<5; i+=1){
+            
+            viewStudent(/*학생번호*/ i, score);
+            
+        }
+    }// end main
+    
+    public static void viewStudent(int stdNo, int[] score){
+        System.out.print("["+stdNo+"]\t");
+        
+        for(int i=0; i<4; i+=1){
+            System.out.print( score[stdNo*4+i] + "\t");
+        }
+        System.out.println();
+    }
+    
+}
+```
+
+- 학생들 점수 구하기(함수)
+
+```
+public class MyClass {
+    // public은 접근 제한자
+    public static void main(String args[]) { 
+        // 함수 scope, 지역성
+        int[] score = new int[]{
+            10,20,20,0,
+            40,60,60,0,
+            20,10,40,0,
+            10,20,20,0,
+            60,40,30,0,
+        };
+        
+        // 배열을 전달해서 출력했음 => 함수끼리는 지역성이 있기때문에 배열을 넘겨줘야함
+        // 전역 변수로 하면 간단하게 해결됨
+        
+        for(int i=0; i<5; i+=1){
+            // 1명만 준다.
+            int[] std = new int[4];
+            // 원본, 원본시작번호, 사본배열명, 사본시작번호, 복사개수
+            System.arraycopy(score, i*4, std, 0,4);
+            score[ i * 4 + 3 ] =sumStudent(std);
+            viewStudent(/*학생번호*/ i, std);
+        }
+        System.out.println("--------");
+        
+        // score 배열을 모두 출력한다.
+        int kor=0, eng=0, math=0;
+        for(int sid=0; sid<5; sid+=1){
+            // 학생 1명당 점수 4개씩 출력한다.
+            for(int jid=0; jid<4; jid+=1){
+                // 교실번호 * 학생 수 + jid번학생
+                System.out.print(score[sid*4+jid]+", ");
+                kor += score[sid*4 + 0];
+                eng += score[sid*4 + 1];
+                math += score[sid*4 + 2];
+            }
+            System.out.println();
+        }
+        System.out.println("\n" + kor + ", " + eng + ", " + math);
+        
+    }// end main
+    
+    // 지역성, 결과가 score 반영
+    public static int sumStudent(int[] score){
+        // 0 + 1 + 2 => 3
+        score[3] = score[0] + score[1] + score[2];
+        return score[3]; // 총합을 반환한다.
+    }
+    
+    public static void viewStudent(int stdNo, int[] score){
+        // System.out.print("0"+\t+"국어"+\t+"영어"+\t+"수학");
+        System.out.print("["+stdNo+"]\t");
+        
+        for(int i=0; i<4; i+=1){
+            System.out.print( score[i] + "\t");
+        }
+        System.out.println();
+    }
+}
+```
+
+## Python
+
+- 함수 기본
+
+```
+# 함수를 생성한다
+def fn(c) :
+    return c+ " " + "Python 3 IDE"
+
+a = fn("Hi");
+
+print(a)
+```
+
+- 배열 슬라이싱
+
+```
+#슬라이싱 : 잘라내기
+li = [10,20,30,40];
+print( li[0] );
+print( li[0:2] );
+print( li[1:2] );
+print( li[1:15] );
+```
