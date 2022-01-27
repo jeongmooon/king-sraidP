@@ -1099,6 +1099,61 @@ public class MyClass {
 }
 ```
 
+- 함수 참조개념
+
+<img src="https://user-images.githubusercontent.com/92348108/151303908-cc70ad1c-e3b9-4543-8491-a71978a1308c.PNG" />
+
+```
+public class MyClass {
+    // public은 접근 제한자
+    public static void main(String args[]) { 
+        // 지역성, 전달, 반환
+        int main_v = 10;
+        int rs =fn();
+        
+        fun( main_v );
+        System.out.println( main_v );
+        
+        int[] a = new int[]{12,23,34};
+        System.out.println( a ); // 배열명
+        int[] d = edit( a ); //배열을 전달한다.
+        System.out.println(a[0]);
+        
+        System.out.println(d);
+        System.out.println(d[0]);
+        d[1] = 20;
+        System.out.println(d[1]);
+        System.out.println(d[2]);
+    }
+    
+    // 지역성, Scope => 이름을 알 수 없다.
+    // Call By Reference(주소, 참조(메모리 주소)) : 호출측에 영향을 준다.
+    public static int[] edit(int[] b){
+        int[] c = new int[10]; // ==> Heap 영역에 생성한다(new 명령어 때문)
+        // new : 전역공간 Heap에 생성하고, 그 주소를 반환하는 연산자
+        System.out.println(c + "c값임");
+        b[0] = 10;
+        b[1] = 10;
+        b[2] = 10;
+        
+        return c; // 배열 반환
+    }
+    
+    // Call By Value : 호출측에 영향이 없다
+    public static void fun(int param) {
+        param += 90;
+        System.out.println(param);
+    }
+    
+    public static int fn() {
+        int fn_v = 20;
+        
+        return fn_v;
+    }
+}
+
+```
+
 ## Python
 
 - 함수 기본
