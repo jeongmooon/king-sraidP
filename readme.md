@@ -1102,6 +1102,8 @@ public class MyClass {
 - 함수 참조개념
 
 <img src="https://user-images.githubusercontent.com/92348108/151303908-cc70ad1c-e3b9-4543-8491-a71978a1308c.PNG" />
+  
+  - gc(garbage collector) oop언어들은 메모리를 사용하지 않는 것들을 자동으로 삭제시킴
 
 ```
 public class MyClass {
@@ -1116,7 +1118,10 @@ public class MyClass {
         
         int[] a = new int[]{12,23,34};
         System.out.println( a ); // 배열명
+                
         int[] d = edit( a ); //배열을 전달한다.
+        // edit함수의 c변수는 없어졌지만 c가 d에게 Heap에 있는 배열주소를 전달해줌
+        
         System.out.println(a[0]);
         
         System.out.println(d);
@@ -1154,6 +1159,80 @@ public class MyClass {
 
 ```
 
+- 함수 참조 값
+- 
+```
+public class MyClass {
+
+    public static void main3(String args[]){
+        int [] a = new int[]{1,2,3,4,5};
+        int [] b = new int[]{1,2,3,4,5};
+        // 두 배열의 모든 요소들이 같은지 확인하세요
+        // => new가 두개여서 배열이 두개다
+        if( a == b ){
+            // 식별 값 비교
+            System.out.println(a + " == " + b);
+        } else {
+            if( a.length == b.length ){
+                String rs = " == ";
+                for(int i=0; i<a.length; i+=1){
+                    if( a[i] != b[i] ){
+                        rs = " != ";
+                        break;
+                    }
+                }
+                System.out.println(a + rs + b);
+            } else {
+                System.out.println("두배열은 다르다");
+            }
+        }
+    }
+    
+    public static void main2(String args[]){
+        // 원시 타입 => int 같이 소문자 시작
+        // 참조 타입(Reference) => 대문자
+        String s1 = new String("james");
+        String s2 = new String("james");
+        // s2 = s1; => 이거라면 같은 식별값을 가진다.
+        System.out.println(s1+", "+s2);
+        
+        
+        
+        // 문자열이 같은지 확인하는 것
+        if(s1.equals(s2)){
+            System.out.println("equal");
+        } else {
+            System.out.println("not equal");
+        }
+        
+        // 식별 값이 같은지 확인하는 것
+        if( s1 == s2 ){
+            System.out.println("equal");
+        } else {
+            System.out.println("not equal");
+        }
+    }
+    
+    public static void main1(String args[]) {
+        // 대문자로 시작하는 것들은 클래스형이다
+        // 클래스들은 주소(hashCode)를 저장한다
+        Integer num = 10;
+        int n = 20;
+        
+        System.out.println(num.hashCode()); // 식별 값
+        
+        String str = "James";
+        System.out.println(str.hashCode());
+        
+        str = "Dean";
+        System.out.println(str.hashCode());
+        
+        // 불변성 = "Dean" => "DEan" 문자하나를 변경하고 싶다
+        // 이렇게 되면 불변성을 위반한 것이 아닌, 문자열을 new로 새로 만드는 것이다.
+    }
+}
+```
+
 ## Python
 
 - 함수 기본
@@ -1177,4 +1256,26 @@ print( li[0] );
 print( li[0:2] );
 print( li[1:2] );
 print( li[1:15] );
+```
+
+
+
+- 함수 참조 값
+  - Python은 모두 Heap에 생성된다.
+  - 때문에 참조값(주소)가 존재한다. 
+
+```
+# Python은 모두 힙에 생성이 됟나.
+
+x = 10;
+print(x);
+print(id(x)); # 식별 값을 반환(위치 값)
+
+x = 20;
+print(x);
+print(id(x));
+
+y = x;
+print(y); 
+print(id(y)); 
 ```
