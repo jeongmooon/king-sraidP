@@ -1545,3 +1545,14 @@ public class MyClass {
 }
 ```
 
+## 컴퓨터내에 java python
+
+### SDK choco 매니지먼트깔기 (윈도우전용)
+    - choco 깔기
+  - choco install openjava;
+
+
+### IDK 깔기
+  - 이클립스, 인텔~, 쥬피터, vscode ...
+
+
