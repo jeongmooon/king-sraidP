@@ -1160,7 +1160,7 @@ public class MyClass {
 ```
 
 - 함수 참조 값
-- 
+ 
 ```
 public class MyClass {
 
@@ -1265,7 +1265,7 @@ print( li[1:15] );
   - 때문에 참조값(주소)가 존재한다. 
 
 ```
-# Python은 모두 힙에 생성이 됟나.
+# Python은 모두 힙에 생성이 된다.
 
 x = 10;
 print(x);
@@ -1323,7 +1323,9 @@ public class MyClass {
 }
 ```
 
+
 #### ver 0.2
+
 ```
 import java.util.Scanner;
 
