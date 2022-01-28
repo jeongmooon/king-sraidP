@@ -1279,3 +1279,133 @@ y = x;
 print(y); 
 print(id(y)); 
 ```
+
+
+# 2022-01-28
+
+## Java
+
+### 학생들 점수구하는 프로그램
+
+  ```
+  - 학생5명 과목3개 CRUD
+    # 세부적정의
+    1. 학생은 5명
+    2. 과목은 3개 : 점수는 정수 or 실수
+        - 어떻게 저장 : 자료구조
+        - int[] : 요소번호 : 학생, 점수를 구분하는 값
+        - 0 : kor, 1 : eng, 2 : math
+        - 점수 3개를 저장하는 배열[] : 이것은 학생 1명
+        - 이것들이 n개가 필요하다  : int[1차배열][2차배열]
+            - 1차배열요소 안에 2차배열들이 존재
+            - 즉 int[학생수][과목수]
+    
+    # tab : \t
+    # LF (수직) : \n
+    # CR (수평) : \r
+    # enter : \r\n
+    ```
+
+#### ver 0.1
+```
+import java.util.Scanner;
+
+public class MyClass {
+    // 전역변수
+    private static Scanner kb; // 키보드
+    private static int[][] a;  // 배열
+    
+    public static void main(String args[]) {
+        //가장 처음 실행되는 함수
+        kb = new Scanner(System.in);
+        a = new int[5][3];
+    }
+}
+```
+
+#### ver 0.2
+```
+import java.util.Scanner;
+
+public class MyClass {
+    // 전역변수
+    private static Scanner kb; // 키보드
+    private static int[][] a;  // 배열
+    
+    public static void main(String args[]) {
+        //가장 처음 실행되는 함수
+        kb = new Scanner(System.in);
+        a = new int[5][3];
+        String cmd;
+        
+        // 기능 실행
+        do{
+            System.out.print("cmd > ");
+            cmd = kb.nextLine();
+            
+            // 점수표 출력하기
+            if("list".equals(cmd)){
+                viewScoreTable();
+            }
+            
+            // 점수를 입력하고 그 이상인 학생 출력 
+            if("over".equals(cmd)){
+                System.out.print("over > ");
+                
+                // 키보드에서 정수를 입력받을 때 사용
+                int num = kb.nextInt();
+                kb.nextLine(); // 숫자가 아닌 엔터값은 버리는 것
+                
+                viewOverScore(num);
+            }
+            
+        } while( !("exit".equals(cmd))); 
+        // 처음에 실행되고 참이라면 반복
+        // 사용자가 "exit" 입력하면 멈춘다
+        System.out.println("terminated");
+    }
+    
+    
+    // 학생 한명 출력하기
+    public static void stdScore(int row) {
+        for(int col=0; col<a[0].length; col++){
+                System.out.print( a[row][col] + "\t");
+            }
+            System.out.println();
+    }
+    
+    // 점수표 함수
+    public static void viewScoreTable(){
+        // 학생 전체
+        for(int row=0; row<a.length; row++){
+            // 한명당 한줄씩 출력하기 위해 
+            stdScore(row); // row번 학생 점수 출력
+        }
+    }
+    
+    // 학생 점수 중에 하나라도 key값 이상의 점수있나 체크
+    public static boolean hasOverScore(int row, int key){
+        // 초기값 설정
+        boolean has = false;
+        for(int i=0; i<3; i++){
+            if(a[row][i] >= key){
+                has = true;
+                break;// 하나라도여서 (모두라면 break는 없어야함)
+            }
+        }
+        return has;
+    }
+    
+    // 점수입력하고 학생 출력 함수
+    public static void viewOverScore(int key){
+        // 학생 전체
+        for(int row=0; row<a.length; row++){
+            // 학생들 점수 중에 하나라도 key이상의 점수가 있다면
+            // if()안에는 boolean만 사용가능(true, false)
+            if(hasOverScore(row, key)){
+                stdScore(row);
+            }
+        }
+    }
+}
+```
